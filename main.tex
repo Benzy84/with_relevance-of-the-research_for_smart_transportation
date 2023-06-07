@@ -1,0 +1,116 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{lipsum}
+\usepackage[skip=0.333\baselineskip]{caption}
+\usepackage{subcaption}
+\usepackage[colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage[style=numeric,backend=bibtex,giveninits=true,terseinits=true,doi=false,url=false,isbn=false]{biblatex}
+\usepackage{geometry}
+\setlength\bibitemsep{0.15\itemsep}
+\geometry{top=0.40in, bottom=0.55in, left=0.5in, right=0.5in}
+\usepackage{enumitem}
+\setlist[enumerate]{itemsep=0.25ex, topsep=0.5ex, parsep=0.5ex, partopsep=0.5ex}
+\linespread{0.975}
+
+
+
+
+\title{\textbf{\Large Improving SNR and Resolution in LiDAR by Matrix-based Analysis}}
+
+\author{
+    \textbf{Benzy Laufer} \\  Supervisor - Prof. Ori Katz \\
+    Institute of Applied Physics, The Hebrew University of Jerusalem. 
+}
+
+\bibliography{ref}
+
+\begin{document}
+
+\date{}
+
+\maketitle
+
+\vspace{-0.5em}
+\section{Introduction}
+\large Light Detection and Ranging (LiDAR) technology is a popular solution for a wide variety of applications, from atmospheric sensing, through 3D shape measurements, to autonomous vehicles and smart transportation systems. LiDAR has the unique ability to map the space around it in three dimensions (3D) and high sensitivity, making it possible to identify road hazards with high spatial and temporal resolution even in harsh conditions. This is achieved by scanning a pulsed or temporally modulated laser beam over the scene and measuring the arrival time of the reflected beam.
+
+However, LiDAR scanning faces two fundamental challenges:
+\begin{enumerate}
+    \item The long distance to the target and the limited aperture size of the light-collecting optics result in very weak signals, particularly in harsh conditions such as foggy or dusty scenes.
+    \item When illuminating a point in the scan, the scanning beam illuminates an area whose size is optimally defined by the diffraction-limit, limited by the transmitter aperture. Additionally, optical distortions and aberrations in the path between the transmitter and the target can further enlarge this area, ultimately limiting the spatial resolution of any LiDAR system.
+\end{enumerate}
+
+\vspace{-0.5em}
+\section{Methodology}
+In my PhD, I will investigate the adaptation and development of advanced matricial techniques to LiDAR imaging for smart transportation applications. Such matrix-based approaches have been recently proved by our group and others to significantly improve resolution, signal to noise (SNR), and image quality in several fields of imaging, from optical microscopy \cite{Badon2020}, through ultrasound \cite{PhysRevX.10.021048}, to seismology \cite{2018JB016361}. The approaches that I will investigate include Image Scanning Microscopy (ISM) \cite{muller} and aberration estimation and correction \cite{Badon2020}. Matrix-based approaches have so far not impacted the important field of LiDAR imaging, mainly because it requires multi-pixel detection. The improvement in multipixel sensitive detector technology now allows implementing such detection, which opens the path to this work.
+
+Currently, there are two common detection approaches in LiDAR:
+\begin{enumerate}
+    \item[a.] Confocal detection: A small detector is used to optimally detect only the light returning from a small area around the illumination point.
+\item[b.] Large ("bucket") detection: where all incoming light is detected.
+\end{enumerate}
+
+While confocal detection offers improved resolution and out-of-focus background rejection, which may be significant in foggy conditions, it may collect substantially less reflected light, resulting in a lower signal-to-noise ratio (SNR).
+
+My research will combine theoretical and numerical investigation in addition to experimental proof-of-principle experiments. As the first stage of my work, I will study the possibility of combining the advantages of both methods by adapting ISM originally developed for optical microscopy. With proper adaptation, it is expected to improve both resolution and SNR in scanning LiDAR for smart transportation applications with a very straightforward computation step.
+
+In short, in ISM, all the light reflected from the target is detected using an array of detectors while the beam is scanned over the scene. While the signal from the central detector provides the confocal (low SNR) image, the signals from the neighboring detectors are 'reassigned' using a simple computation to improve the SNR while improving the imaging resolution.
+
+\vspace{-0.5em}
+\section{Impact on Smart Transportation}
+The proposed research on improving LiDAR technology has the potential to significantly contribute to the vision of Zero Transportation Externalities in three dimensions: Zero casualties, Zero delays, and Zero environmental harm.
+
+1. \textbf{Zero casualties:} Enhanced LiDAR performance would allow autonomous vehicles to better detect and avoid obstacles, leading to improved safety for passengers and pedestrians, and potentially reducing the number of accidents and casualties.
+
+2. \textbf{Zero delays:} Improved LiDAR systems can help in more accurate mapping and navigation, leading to better route planning and traffic management. This can contribute to reducing traffic congestion, minimizing delays, and ensuring more efficient transportation.
+
+3. \textbf{Zero environmental harm:} By facilitating the development and adoption of autonomous vehicles, the proposed research can help reduce the environmental impact of transportation. Autonomous vehicles have the potential to optimize fuel consumption, reduce emissions, and promote the use of electric vehicles, contributing to a greener transportation system.
+
+\vspace{-0.5em}
+\section{Preliminary Results}
+In my short work so far, I have performed a preliminary numerical investigation of ISM using a Python-based numerical simulation that I have developed. 
+The preliminary simulation results presented in Fig.1  demonstrate that ISM imaging outperforms confocal imaging, which by itself outperforms bucket-based LiDAR imaging. These encouraging findings support the potential benefits of incorporating this basic matricial approach into scanning LiDAR systems for smart transportation.
+
+Following the experimental proof-of-principle demonstration of ISM in free space, we will further examine additional possibilities for improving LiDAR in cases of scattering and atmospheric aberrations, as is present in many actual scenarios. Tackling this important challenge, which has a huge societal impact, will be done by leveraging more advanced matricial approaches, such as those very recently presented to overcome aberration and scattering in optical coherence tomography (OCT) \cite{Badon2020}, ultrasound imaging \cite{PhysRevX.10.021048} and seismology\cite{2018JB016361}, and which represent the state-of-the-art in wave-based imaging.
+
+\begin{figure}[hbt!]
+\centering
+\begin{minipage}{.225\linewidth}
+\centering
+\captionsetup{type=figure}
+Target \
+\includegraphics[width=\linewidth]{001 Object.png}
+\label{subfig:original}
+\end{minipage}\hfill
+\begin{minipage}{.225\linewidth}
+\centering
+\captionsetup{type=figure}
+Conventional LiDAR \
+\includegraphics[width=\linewidth]{002 wide field imaging.png}
+\label{subfig:conventional}
+\end{minipage}\hfill
+\begin{minipage}{.225\linewidth}
+\centering
+\captionsetup{type=figure}
+Confocal LiDAR \
+\includegraphics[width=\linewidth]{003 Confocal Imaging.png}
+\label{subfig:confocal}
+\end{minipage}\hfill
+\begin{minipage}{.225\linewidth}
+\centering
+\captionsetup{type=figure}
+ISM LiDAR \
+\includegraphics[width=\linewidth]{004 ISM Imaging.png}
+\label{subfig:ISM}
+\end{minipage}
+\caption{Preliminary numerical simulation results comparing different LiDAR imaging approaches: (a) Target, (b) Conventional LiDAR, (c) Confocal LiDAR, and (d) ISM LiDAR.}
+\label{fig:comparison}
+\end{figure}
+
+\small
+\printbibliography
+
+\end{document}
